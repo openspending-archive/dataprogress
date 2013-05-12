@@ -52,7 +52,7 @@
 <div class="record">
   <h3>
     {{title}}
-    {{#owners}}<img title="owner {{name}}" src="{{gravatar}}" />{{/owners}}
+    {{#owners}}<img class="gravatar thumbnail" title="Owned by {{name}}" src="{{gravatar}}" />{{/owners}}
 
     {{^owners}}
     <div class="alert" style="display: inline;">No owner yet<span style="font-size: 34px;">&#9786;</span> <a href="" class="btn btn-large take-it-on" data-toggle="modal" data-target="#take-it-on-modal">Take it on &raquo;</a></div>

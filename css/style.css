@@ -16,3 +16,8 @@
   margin-top: 50px;
   padding: 20px 0;
 }
+
+.gravatar {
+  margin-left: 10px;
+  display: inline;
+}
