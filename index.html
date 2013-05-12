@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Load Status - OpenSpending</title>
+  <title>Data Load Status - OpenSpending</title>
   <meta name="author" content="OpenSpending">
 
   <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -18,10 +18,13 @@
 <div class="content">
   <div class="page-header">
     <h1>
-      OpenSpending Load Status
+      OpenSpending Data Load Status
       <a href="http://openspending.org/" style="float: right;"><img src="http://assets.okfn.org/p/openspending/img/openspending-logo.png" style="height: 40px; margin-top: -5px;" alt="" /></a>
+      <br />
+      <small>what's requested, what's in progress, what's done</small>
     </h1>
   </div>
+  <div class="alert alert-success">Want to add data to the list? <a href="#" class="source-url">Add it here &raquo;</a></div>
   <div class="load-status"></div> <!-- /page.view -->
   <footer>
     <a href="" class="source-url">Source Google Docs Spreadsheet</a> &ndash;
@@ -34,38 +37,57 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
 <script src="http://okfnlabs.org/recline.backend.gdocs/backend.gdocs.js"></script>
-<script src="http://listify.okfnlabs.org/vendor/recline/src/backend.memory.js"></script>
-<script src="http://listify.okfnlabs.org/js/listify.js"></script>
+<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/md5.js"></script>
+
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/mustache" id="our-template">
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Owner</th>
-      <th>Progress</th>
-      <th>Title</th>
-      <th>Priority</th>
-      <th>Work Needed</th>
-      <th>Data Info</th>
-    </tr>
-  </thead>
-  <tbody>
 {{#records}}
-    <tr>
-      <td>
-        {{#owner}}{{owner}}{{/owner}}
-        {{^owner}}<a href="">Help wanted :-)!</a>{{/owner}}
-      </td>
-      <td>{{progress}}</td>
-      <td>{{title}}</td>
-      <td>{{priority}}</td>
-      <td>{{workneeded}}</td>
-      <td style="max-width: 40%;">{{#dataurl}}<a href="{{dataurl}}">Data source</a>{{/dataurl}} {{notes}}</td>
-    </tr>
-{{/records}}
-  </tbody>
-</table>
+<div class="record">
+  <h3>
+    <a href="#" class="js-more-info" title="Click to show (hide) more info"><i class="icon-info-sign"></i></a>
+    {{title}}
+    {{#owners}}<img title="owner {{name}}" src="{{gravatar}}" />{{/owners}}
+
+    {{^owners}}
+    <div class="alert" style="display: inline;">No owner yet! <a href="">Claim the task <span style="font-size: 25px;">&#9786;</span> &raquo;</a></div>
+    {{/owners}}
+  </h3>
+
+<div class="progress">
+  <div class="bar" style="width: {{progress}}%;" title="progress so far"></div>
 </div>
+
+<dl class="dl-horizontal more-info" style="display: none;">
+  <dt>
+    Source Data
+  </dt>
+  <dd>
+    {{#dataurl}}<a href="{{dataurl}}">{{dataurl}}</a>{{/dataurl}}
+    {{^dataurl}}&nbsp;{{/dataurl}}
+  </dd>
+  <dt>
+    Description
+  </dt>
+  <dd>
+  {{place}}{{#period}} &ndash; {{period}}{{/period}}.
+  {{description}}
+  </dd>
+  <dt>
+    Work Needed
+  </dt>
+  <dd>
+    {{workneeded}}
+  </dd>
+  <dt>
+    Notes
+  </dt>
+  <dd>
+    {{notes}}
+  </dd>
+</dl>
+</div>
+{{/records}}
 </script>
   
 </body>
