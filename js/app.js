@@ -1,6 +1,7 @@
 jQuery(function($) {
   var url = 'https://docs.google.com/a/okfn.org/spreadsheet/ccc?key=0AvdkMlz2NopEdElqWTBJS0Q1Q083VlI3YUFLTl9OY0E#gid=0';
   var $el = $('.load-status');
+  $el.html('<h3>Loading <img src="http://assets.okfn.org/images/icons/ajaxload-circle.gif" /></h3>');
   var tmpl = $('#our-template').html();
   recline.Backend.GDocs.fetch({url: url})
     .done(function(results) {
@@ -9,6 +10,8 @@ jQuery(function($) {
       results.records = _.map(results.records, function(record) {
         record.owners = parseOwners(record.owners);
         record.noOwner = (record.owners.length === 0)
+        record.description = markup(record.description);
+        record.notes = markup(record.notes);
         return record
       });
       var out = Mustache.render(tmpl, results);
@@ -42,4 +45,10 @@ function parseOwners(owners) {
     return newowner;
   });
   return out;
+}
+
+// replace http:// to a string ...
+function markup(str) {
+  str = str.replace(/(https?:\/\/[^ ]+)/g, '<a href="$1">$1</a>');
+  return str;
 }

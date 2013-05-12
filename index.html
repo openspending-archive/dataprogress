@@ -45,15 +45,25 @@
 {{#records}}
 <div class="record">
   <h3>
-    <a href="#" class="js-more-info" title="Click to show (hide) more info"><i class="icon-info-sign"></i></a>
     {{title}}
     {{#owners}}<img title="owner {{name}}" src="{{gravatar}}" />{{/owners}}
 
     {{^owners}}
-    <div class="alert" style="display: inline;">No owner yet! <a href="">Claim the task <span style="font-size: 25px;">&#9786;</span> &raquo;</a></div>
+    <div class="alert" style="display: inline;">No owner yet<span style="font-size: 34px;">&#9786;</span> <a href="" class="btn btn-large take-it-on" data-toggle="modal" data-target="#take-it-on-modal">Take it on &raquo;</a></div>
     {{/owners}}
   </h3>
 
+<p class="data-source">
+  Data source: 
+  {{#dataurl}}
+  <a href="{{dataurl}}">{{dataurl}}</a>
+  ({{dataformat}}{{^dataformat}}Unknown format{{/dataformat}})
+  {{/dataurl}}
+  {{^dataurl}}
+  <strong>To be located!</strong>
+  {{/dataurl}}
+  &ndash; <a href="#" class="js-more-info" title="Click to show (hide) more info"><i class="icon-info-sign"></i> More info</a>
+</p>
 <div class="progress">
   <div class="bar" style="width: {{progress}}%;" title="progress so far"></div>
 </div>
@@ -71,7 +81,7 @@
   </dt>
   <dd>
   {{place}}{{#period}} &ndash; {{period}}{{/period}}.
-  {{description}}
+  {{{description}}}
   </dd>
   <dt>
     Work Needed
@@ -83,15 +93,24 @@
     Notes
   </dt>
   <dd>
-    {{notes}}
+    {{{notes}}}
   </dd>
 </dl>
 </div>
 {{/records}}
 </script>
+
+<div class="modal hide fade" id="take-it-on-modal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Great to hear! Here's how to get started &hellip;</h3>
+  </div>
+  <div class="modal-body">
+    <p>First, take 30s to claim this item by heading over to <a href="#" class="source-url" target="_blank">this google spreadsheet</a> and adding yourself as an owner for this item.</p>
+    <p>Next, start preparing that data! We have an <a href="http://openspending.org/help/data-loading.html" target="_blank">in depth guide</a> to help you and there's a <a href="http://openspending.org/about/contact.html" target="_blank">friendly community of other OpenSpending folks to help and talk with</a>.</p>
+  </div>
+</div>
+</script>
   
 </body>
 </html>
-
-
-
