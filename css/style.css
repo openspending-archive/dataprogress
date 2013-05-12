@@ -11,3 +11,8 @@
   font-style: italic;
 }
 
+.footer {
+  border-top: solid 1px #ccc;
+  margin-top: 50px;
+  padding: 20px 0;
+}
