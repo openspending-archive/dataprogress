@@ -24,8 +24,15 @@
       <small>what's requested, what's in progress, what's done</small>
     </h1>
   </div>
-  <div class="alert alert-success">Want to add data to the list? <a href="#" class="source-url">Add it here &raquo;</a></div>
-  <div class="load-status"></div> <!-- /page.view -->
+  <div class="row">
+    <div class="span8">
+      <div class="load-status"></div>
+    </div>
+    <div class="span4">
+      <p><a href="#" class="source-url btn btn-large btn-success">Add new data to the list &raquo;</a></p>
+    </div>
+  </div>
+
   <div class="footer">
     <a href="" class="source-url">Source Google Docs Spreadsheet</a>
     &ndash;
@@ -52,12 +59,15 @@
 <div class="record">
   <h3>
     {{title}}
+  </h3>
+
+  <div class="owners">
     {{#owners}}<img class="gravatar thumbnail" title="Owned by {{name}}" src="{{gravatar}}" />{{/owners}}
 
     {{^owners}}
-    <div class="alert" style="display: inline;">No owner yet<span style="font-size: 34px;">&#9786;</span> <a href="" class="btn btn-large take-it-on" data-toggle="modal" data-target="#take-it-on-modal">Take it on &raquo;</a></div>
+    <a href="" class="btn btn-large btn-primary take-it-on" data-toggle="modal" data-target="#take-it-on-modal">No owner yet &ndash; take it on &raquo;</a>
     {{/owners}}
-  </h3>
+  </div>
 
 <p class="data-source">
   Data source: 
